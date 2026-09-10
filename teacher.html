@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teachers day</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            
+        }
+        body{
+            width: 100%;
+            background-image: url('back.png');
+            background-repeat: no-repeat;
+            background-position: center center;
+           
+        }
+        .hadder{
+            text-align: center;
+            color: #ffd700;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .gold-box {
+    border: 2px solid #D4AF37;
+    color: #D4AF37;
+    margin: 40px 19px 0 19px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: transparent;
+}
+
+.gold-box p {
+    color: #D4AF37;
+    margin: 0;
+}
+
+
+    /*teacher*/
+ .teacher-greeting-section {
+    background-color: #ffffff; /* Sudu pata background eka */
+    border: 2px solid #D4AF37; /* Elegant gold border eka */
+    border-radius: 12px; /* Dethun paittha round wenna */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Box eka maseela penna podi shadow ekak */
+    text-align: center;
+    padding: 35px 20px;
+    margin: 20px auto;
+    max-width: 500px;
+}
+
+#teacherNameDisplay {
+    color: #1A365D; /* Deep Navy Blue (Guruthumage namata) */
+    font-size: 26px;
+    margin-bottom: 12px;
+    font-weight: bold;
+}
+
+.greeting-message {
+    color: #B8860B; /* Dark Warm Gold (Subha pathana vachanayata) */
+    font-size: 20px;
+    margin: 0;
+    font-weight: 600;
+}
+
+
+/*start contain*/
+#star-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* User ta wena wada karanna meka badhawak wenne na */
+    z-index: 9999;
+    overflow: hidden;
+}
+
+.falling-star {
+    position: absolute;
+    top: -20px;
+    color: #FFD700; /* Gold color */
+    user-select: none;
+    /* Eliya widihata penna glow effect eka */
+    text-shadow: 0 0 5px #FFD700, 0 0 10px #DAA520, 0 0 15px #FFD700; 
+}
+
+/* Pahala vatena animation eka */
+@keyframes fall {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(105vh); }
+}
+
+/* Nivi nivi paththu wena (Blinking/Fading) animation eka */
+@keyframes blink {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 0.1; } /* Madadi paha adu wenawa */
+}
+
+
+
+/*teacher poto*/
+.image-container {
+    text-align: center; /* Image eka madata ganna */
+    padding: 15px;
+    margin: 20px auto;
+}
+
+.responsive-img {
+    max-width: 100%; /* Mobile waladdi screen ekenn pitata yanne nathuwa auto adjust wenawa */
+    height: auto; /* Image eke shape (aspect ratio) eka adawenne nathuwa thiyagannawa */
+    border-radius: 10px; /* Edge tika poddak round wenna (Ona nathnam me line eka ain karanna) */
+    
+    /* Image ekata gold border ekak ona nam pahala line eke thiyena comment eka ain karanna */
+    /* border: 2px solid #D4AF37; */
+}
+
+
+
+    </style>
+</head>
+<body>
+   
+    <div class="body">
+         <div id="star-container"></div>
+
+
+        <div class="hadder">
+            <h1>TEACHER'S DAY 2026</h1>
+        </div>
+
+        <div class="gold-box">
+    <p style="text-align: center; font-weight: 500; font-size: 17px;">අකුරෙන් අකුර ජීවිතය කියාදුන්,<br>දැනුමෙන් ලොව දිනන්න පාර කී,<br>ආදරණීය ගුරුතුමනි/තුමියනි,<br> <span style="font-weight: 700; font-size: 20px;">ඔබ අපට නොමැකෙන මතකයකි</span> </p>
+</div>
+
+   <div class="teacher-greeting-section">
+    <h2 id="teacherNameDisplay">Adaraniya ගුරුතුමනි,</h2>
+    <p class="greeting-message" >සුභ ගුරුදිනයක් වේවා!</p>
+</div>
+
+<div class="image-container">
+    <img src="teacher.png" alt="Teacher Day Image" class="responsive-img">
+</div>
+        
+    </div>
+
+
+
+    <script>
+        // URL eken parameter eka ganna code eka
+const urlParams = new URLSearchParams(window.location.search);
+const tName = urlParams.get('name');
+
+if (tName) {
+    document.getElementById('teacherNameDisplay').innerText = tName + " ගුරුතුමනි,";
+}
+
+
+
+
+//tharu kada vetena4
+function createStar() {
+    const container = document.getElementById('star-container');
+    if (!container) return;
+
+    const star = document.createElement('div');
+    star.classList.add('falling-star');
+    
+    // Tharuwa wenuwata podi dot ekak (eliya) add karanawa
+    star.innerHTML = '●'; 
+
+    // Screen eke random than walin patan ganna
+    star.style.left = Math.random() * 100 + 'vw';
+    
+    // Pahalat vatena welawa (Thawa slow kala: seconds 5 - 12 athara)
+    const fallDuration = Math.random() * 7 + 5; 
+    
+    // Nivi nivi paththu wena welawa (seconds 1 - 3 athara)
+    const blinkDuration = Math.random() * 2 + 1;
+
+    // Animations deka JS eken set karana eka (kalin awula awe methana nisa meka fix kara)
+    star.style.animation = `fall ${fallDuration}s linear infinite, blink ${blinkDuration}s ease-in-out infinite`;
+
+    // Eliye loku kuda bava (4px - 10px athara)
+    star.style.fontSize = (Math.random() * 6 + 4) + 'px'; 
+
+    container.appendChild(star);
+
+    // Eliya pahaḷata vatila iwara unama system eken remove karanna
+    setTimeout(() => {
+        star.remove();
+    }, fallDuration * 1000); 
+}
+
+// Milliseconds 300kata parak aluth eliyak wateena speed eka set kara
+setInterval(createStar, 300);
+
+
+
+//code copy block
+// 1. Right Click (Context Menu) Disable කිරීම
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+});
+
+// 2. Keyboard Shortcuts Disable කිරීම (F12, Ctrl+Shift+I, Ctrl+U)
+document.onkeydown = function(e) {
+    // F12 Disable
+    if(e.keyCode == 123) {
+        return false;
+    }
+    // Ctrl+Shift+I (Inspect Element) Disable
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+        return false;
+    }
+    // Ctrl+Shift+J (Console) Disable
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+        return false;
+    }
+    // Ctrl+U (View Source) Disable
+    if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+        return false;
+    }
+}
+    </script>
+</body>
+</html>
